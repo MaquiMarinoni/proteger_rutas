@@ -1,20 +1,25 @@
-//
-import { PRODUCTS } from "../../../data/data";
+// src/pages/store/home/home.ts
+import { PRODUCTS } from "../../../data/data"; // Tu ruta ajustada
+import type { Product } from "../../../types/product"; // Importa la interfaz para el tipado
 
 const app = document.getElementById("app")!;
 
-function renderProducts() {
-    // Usamos .map() para transformar cada objeto Producto en una cadena de HTML
-    const productsHTML = PRODUCTS.map(product => `
-        <div class="product-card">
+// Función simple para listar nombres en pantalla
+function renderizarCatalogo() {
+    // Si el contenedor está vacío, lo llenamos
+    app.innerHTML = `<h1>Catálogo de Productos</h1> <div id="catalog-list"></div>`;
+    
+    const container = document.getElementById("catalog-list")!;
+    
+    PRODUCTS.forEach((product: Product) => {
+        const card = document.createElement("div");
+        card.innerHTML = `
             <h3>${product.nombre}</h3>
             <p>Precio: $${product.precio}</p>
-            <button>Agregar al carrito</button>
-        </div>
-    `).join(""); // .join("") convierte el array de strings en un solo string
-
-    app.innerHTML = productsHTML;
+        `;
+        container.appendChild(card);
+    });
 }
 
-// Ejecutamos la función al cargar
-renderProducts();
+// Ejecutamos
+renderizarCatalogo();
