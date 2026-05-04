@@ -1,4 +1,5 @@
 // src/utils/data.ts
+
 import type { Product } from "../types/product";
 import type { ICategory } from "../types/category";
 
@@ -290,7 +291,7 @@ export const PRODUCTS: Product[] = [
     categorias: [categorias[5]],
   },
 ]
- 
+
 
 export function getCategories(): ICategory[] {
   return categorias.filter((c) => !c.eliminado);
