@@ -1,6 +1,7 @@
 // src/pages/store/home/home.ts
 import { PRODUCTS } from "../../../data/data"; // Tu ruta ajustada
 import type { Product } from "../../../types/product"; // Importa la interfaz para el tipado
+import { addToCart } from "../cart/cart";
 
 const app = document.getElementById("app")!;
 
@@ -23,3 +24,22 @@ function renderizarCatalogo() {
 
 // Ejecutamos
 renderizarCatalogo();
+
+// Escuchamos clics en el contenedor principal
+app.addEventListener("click", (event) => {
+    const target = event.target as HTMLElement;
+
+    // Verificamos si lo que clickeamos tiene la clase "add-btn"
+    if (target.classList.contains("add-btn")) {
+        const productId = Number(target.getAttribute("data-id"));
+        
+        // Buscamos el producto en tu lista original (PRODUCTS)
+        const productToAdd = PRODUCTS.find(p => p.id === productId);
+        
+        if (productToAdd) {
+            addToCart(productToAdd);
+            alert(`${productToAdd.nombre} agregado al carrito!`);
+        }
+    }
+});
+
